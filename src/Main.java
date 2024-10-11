@@ -15,7 +15,11 @@ public class Main {
 
         linkedList.printLinkedList();
 
-        System.out.println(linkedList.kthToTheLastElement(3));
+        Node tobeDeleted = linkedList.findNode(30);
+        linkedList.deleteMiddleNode(tobeDeleted);
+
+        linkedList.printLinkedList();
+
 
 
     }

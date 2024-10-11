@@ -12,6 +12,29 @@ public class LinkedList {
         this.front = front;
     }
 
+    public void deleteMiddleNode(Node node) {
+
+        if (node == null || node.next == null) {
+            return;
+        }
+
+        node.val = node.next.val;
+        node.next = node.next.next;
+
+    }
+
+    public Node findNode(int val) {
+        Node current = front;
+
+        while (current != null) {
+            if (current.val == val) {
+                return current;
+            }
+            current = current.next;
+        }
+        return null;
+    }
+
     public int kthToTheLastElement(int n) {
 
         if (front == null) {
