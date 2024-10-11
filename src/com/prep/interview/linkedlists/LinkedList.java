@@ -12,6 +12,30 @@ public class LinkedList {
         this.front = front;
     }
 
+    public int kthToTheLastElement(int n) {
+
+        if (front == null) {
+            return -1;
+        }
+
+        Node runner1 = front;
+        for (int i = 0; i < n; i++) {
+            if (runner1 == null) {
+                return -1;
+            }
+            runner1 = runner1.next;
+        }
+
+        Node runner2 = front;
+        while (runner1 != null) {
+            runner1 = runner1.next;
+            runner2 = runner2.next;
+        }
+
+        return runner2.val;
+
+    }
+
     public Node removeDuplicatesInUnsortedLinedList_3() {
 
         if (front == null) {
