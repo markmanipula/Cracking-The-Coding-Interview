@@ -12,6 +12,80 @@ public class LinkedList {
         this.front = front;
     }
 
+    public Node partition(int n) {
+        if (front == null) {
+            return null;
+        } else if (front.next == null) {
+            return front;
+        }
+
+        Node smallerHead = new Node(0);
+        Node biggerHead = new Node(0);
+        Node smaller = smallerHead;
+        Node bigger = biggerHead;
+        Node current = front;
+
+        while (current != null) {
+            if (current.val >= n) {
+                bigger.next = new Node(current.val);
+                bigger = bigger.next;
+            } else {
+                smaller.next = new Node(current.val);
+                smaller = smaller.next;
+            }
+            current = current.next;
+        }
+
+        smaller.next = biggerHead.next;
+        return smallerHead.next;
+
+    }
+
+    public boolean isPalindrome() {
+        if (front == null) {
+            return false;
+        }
+
+        Node fast = front;
+        Node slow = front;
+
+        //get mid point
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        Node secondHalf = slow.next;
+
+        //cut the list
+        slow.next = null;
+
+        Node current = secondHalf;
+        Node next;
+        Node previous = null;
+
+        //reverse the secondHalf
+        while (current != null) {
+            next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+
+        //compare
+        secondHalf = previous;
+        Node runner = front;
+        while (secondHalf != null) {
+            if (secondHalf.val != runner.val) {
+                return false;
+            }
+            secondHalf = secondHalf.next;
+            runner = runner.next;
+        }
+
+        return true;
+    }
+
     public void deleteMiddleNode(Node node) {
 
         if (node == null || node.next == null) {
@@ -239,6 +313,16 @@ public class LinkedList {
             current = current.next;
         }
         System.out.println(sb);
+    }
+
+    public void printNode(Node head) {
+        Node current = head;
+
+        while (current != null) {
+            System.out.print(current.val + " -> ");
+            current = current.next;
+        }
+        System.out.println("null");
     }
 
 }
