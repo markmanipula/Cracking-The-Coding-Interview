@@ -9,16 +9,14 @@ public class Main {
         linkedList.appendToTail(10);
         linkedList.appendToTail(20);
         linkedList.appendToTail(30);
-        linkedList.appendToTail(40);
-        linkedList.appendToTail(50);
-        linkedList.appendToTail(60);
+        linkedList.appendToTail(30);
+        linkedList.appendToTail(30);
+        linkedList.appendToTail(20);
+        linkedList.appendToTail(10);
 
         linkedList.printLinkedList();
 
-        Node tobeDeleted = linkedList.findNode(30);
-        linkedList.deleteMiddleNode(tobeDeleted);
-
-        linkedList.printLinkedList();
+        System.out.println(linkedList.isPalindrome());
 
 
 

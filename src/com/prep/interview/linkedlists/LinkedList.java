@@ -12,6 +12,51 @@ public class LinkedList {
         this.front = front;
     }
 
+    public boolean isPalindrome() {
+        if (front == null) {
+            return false;
+        }
+
+        Node fast = front;
+        Node slow = front;
+
+        //get mid point
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        Node secondHalf = slow.next;
+
+        //cut the list
+        slow.next = null;
+
+        Node current = secondHalf;
+        Node next;
+        Node previous = null;
+
+        //reverse the secondHalf
+        while (current != null) {
+            next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+
+        //compare
+        secondHalf = previous;
+        Node runner = front;
+        while (secondHalf != null) {
+            if (secondHalf.val != runner.val) {
+                return false;
+            }
+            secondHalf = secondHalf.next;
+            runner = runner.next;
+        }
+
+        return true;
+    }
+
     public void deleteMiddleNode(Node node) {
 
         if (node == null || node.next == null) {
