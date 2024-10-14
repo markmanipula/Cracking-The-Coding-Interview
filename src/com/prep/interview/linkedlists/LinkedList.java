@@ -12,6 +12,50 @@ public class LinkedList {
         this.front = front;
     }
 
+    public Node loopDetection() {
+
+        if (front == null) {
+            return null;
+        }
+
+        Node slow = front;
+        Node fast = front;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if (slow == fast) {
+                Node runner = front;
+                while (runner != slow) {
+                    runner = runner.next;
+                    slow = slow.next;
+                }
+                return runner;
+            }
+        }
+        return null;
+    }
+
+    public Node intersection(Node node1, Node node2) {
+        Set<Node> set = new HashSet<>();
+        Node node1Runner = node1;
+        while (node1Runner != null) {
+            set.add(node1Runner);
+            node1Runner = node1Runner.next;
+        }
+
+        Node node2Runner = node2;
+        while (node2Runner != null) {
+            if (set.contains(node2Runner)) {
+                return node2Runner;
+            }
+            node2Runner = node2Runner.next;
+        }
+
+        return null;
+    }
+
     public Node partition(int n) {
         if (front == null) {
             return null;

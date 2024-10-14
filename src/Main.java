@@ -7,19 +7,25 @@ public class Main {
 
         LinkedList linkedList = new LinkedList();
         linkedList.appendToTail(1);
-        linkedList.appendToTail(1);
         linkedList.appendToTail(9);
         linkedList.appendToTail(4);
-        linkedList.appendToTail(1);
-        linkedList.appendToTail(1);
-        linkedList.appendToTail(2);
-        linkedList.appendToTail(5);
-        linkedList.appendToTail(1);
-        linkedList.appendToTail(6);
-        linkedList.appendToTail(3);
+
+        Node node1 = linkedList.findNode(9);
+
+        LinkedList linkedList2 = new LinkedList();
+        linkedList2.appendToTail(2);
+        linkedList2.appendToTail(5);
+        linkedList2.appendToTail(1);
+        linkedList2.appendToTail(9);
+        linkedList2.appendToTail(3);
+        Node node2 = linkedList.findNode(9);
 
         linkedList.printLinkedList();
-        linkedList.printNode(linkedList.partition(3));
+        linkedList2.printLinkedList();
+
+        LinkedList linkedList3 = new LinkedList();
+
+        linkedList3.printNode(linkedList.intersection(node1, node2));
 
     }
 }
