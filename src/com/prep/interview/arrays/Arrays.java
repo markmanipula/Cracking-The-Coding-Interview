@@ -2,6 +2,25 @@ package com.prep.interview.arrays;
 
 public class Arrays {
 
+    public int findPeakElement(int[] array) {
+
+        int left = 0;
+        int right = array.length - 1;
+
+        while (left < right) {
+            int middle = left + (right - left) / 2;
+
+            //move right
+            if (array[middle] < array[middle + 1]) {
+                left = middle + 1;
+            } else {
+                right = middle -1;
+            }
+        }
+
+        return left;
+    }
+
     public int[][] zeroMatrix(int[][] matrix) {
 
         boolean[] row = new boolean[matrix.length];
