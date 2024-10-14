@@ -1,5 +1,6 @@
 import com.prep.interview.linkedlists.LinkedList;
 import com.prep.interview.linkedlists.Node;
+import com.prep.interview.strings.Strings;
 
 public class Main {
 
@@ -24,6 +25,10 @@ public class Main {
         linkedList2.printLinkedList();
 
         LinkedList linkedList3 = new LinkedList();
+
+        Strings string = new Strings();
+
+        System.out.println(string.firstUnique("abaadb"));
 
         linkedList3.printNode(linkedList.intersection(node1, node2));
 
