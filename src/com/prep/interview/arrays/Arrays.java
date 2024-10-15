@@ -14,7 +14,7 @@ public class Arrays {
             if (array[middle] < array[middle + 1]) {
                 left = middle + 1;
             } else {
-                right = middle -1;
+                right = middle;
             }
         }
 

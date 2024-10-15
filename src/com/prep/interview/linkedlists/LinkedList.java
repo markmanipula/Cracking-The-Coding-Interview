@@ -8,6 +8,39 @@ public class LinkedList {
     private Node front;
 
     public LinkedList() {}
+
+    public Node rotateList(int k) {
+        Node temp = new Node();
+        temp.next = front;
+
+        int size = 0;
+        Node runner = front;
+        while (runner != null) {
+            runner = runner.next;
+            size++;
+        }
+
+        if (k > size) k = k % size;
+        if (k % size == 0) return front;
+
+        Node fast = front;
+        Node slow = front;
+        for (int i = 0; i < k; i++) {
+            fast = fast.next;
+        }
+        while (fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        fast.next = front;
+        front = slow.next;
+        slow.next = null;
+
+
+        return front;
+    }
+
     public LinkedList (Node front) {
         this.front = front;
     }

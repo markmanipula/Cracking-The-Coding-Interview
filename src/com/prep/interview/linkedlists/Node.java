@@ -10,6 +10,8 @@ public class Node {
         this.val = val;
     }
 
+    public Node() {};
+
     public Node (Node next) {
         this.next = next;
     }
