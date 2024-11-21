@@ -20,6 +20,8 @@ public class Main {
         AnimalShelter animalShelter = new AnimalShelter();
         Tree tree = new Tree();
 
+        System.out.println("test");
+
         tree.createBinarySearchTree(new int []{2,4,6,8,10,12,14,16});
     }
 }
