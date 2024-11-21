@@ -5,6 +5,24 @@ import java.util.List;
 
 public class Arrays {
 
+    public int maxProfit(int[] prices) {
+        if (prices == null || prices.length < 2) return 0;
+
+        int left = 0;
+        int right = 1;
+        int max = 0;
+
+        while (right < prices.length) {
+            if (prices[left] > prices[right]) {
+                left = right;
+            } else {
+                max = Math.max(max, prices[right] - prices[left]);
+            }
+            right++;
+        }
+        return max;
+    }
+
     public int minDistance(final int[] array,
                            final int item1,
                            final int item2) {
