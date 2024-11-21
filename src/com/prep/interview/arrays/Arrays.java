@@ -5,6 +5,25 @@ import java.util.List;
 
 public class Arrays {
 
+    public int minDistance(final int[] array,
+                           final int item1,
+                           final int item2) {
+        int min = Integer.MAX_VALUE;
+        int current = 0;
+        int currentsIndex = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == item1 || array[i] == item2) {
+                if (current != array[i]) {
+                    min = Math.min(min, i - currentsIndex);
+                }
+                current = array[i];
+                currentsIndex = i;
+            }
+            if (min == 1) return min;
+        }
+        return min;
+    }
+
     public boolean meetingRooms(List<int[]> meetings) {
         meetings.sort((a, b) -> Integer.compare(a[0], b[0]));
 
