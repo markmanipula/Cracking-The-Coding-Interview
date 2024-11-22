@@ -8,6 +8,38 @@ import java.util.Set;
 
 public class Strings {
 
+    public String longestPalindrome(String s) {
+        int max = 0;
+        String longest = "";
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = s.length() - 1; j > i; j--) {
+                String current = s.substring(i, j + 1);
+                if (isPalindrome(current)) {
+                    if (current.length() > max) {
+                        longest = current;
+                        max = current.length();
+                    }
+                }
+            }
+        }
+        return longest;
+    }
+
+    public boolean isPalindrome(String s) {
+
+            String word = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+
+            int last = word.length() - 1;
+            for (int i = 0; i < word.length() / 2; i++) {
+                if (word.charAt(i) != word.charAt(last)) {
+                    return false;
+                }
+                last--;
+            }
+            return true;
+    }
+
+
     public int longestSubstringWithoutRepeat(String s) {
         Set<Character> set = new HashSet<>();
         int max = 0;

@@ -46,7 +46,6 @@ public class Tree {
         return isLeftBst && isRightBst;
     }
 
-
     public boolean isTreeBalanced(final TreeNode node) {
         return isTreeBalancedHelper(node) == 1;
     }
@@ -64,7 +63,6 @@ public class Tree {
         }
         return Math.max(leftHeight, rightHeight) + 1;
     }
-
 
     public List<LinkedList<TreeNode>> createListOfDepths(final TreeNode root) {
 
