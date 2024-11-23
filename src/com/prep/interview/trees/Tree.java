@@ -9,6 +9,31 @@ public class Tree {
 
     TreeNode root;
 
+    public TreeNode successor(TreeNode node) {
+        if (node.right != null) {
+            //go to left most subtree
+            TreeNode runner = node.right;
+            while (runner.left != null) {
+                runner = runner.left;
+            }
+            return runner;
+        }
+
+        TreeNode current = root;
+        TreeNode successor = null;
+        while (current != null) {
+            if (node.value < current.value) {
+                successor = current; //potential successor
+                current = current.left;
+            } else if (node.value > current.value) {
+                current = current.right;
+            } else {
+                break;
+            }
+        }
+        return successor;
+    }
+
     public boolean isSameTree(final TreeNode p, final TreeNode q) {
 
         List<Integer> pList = new ArrayList<>();
