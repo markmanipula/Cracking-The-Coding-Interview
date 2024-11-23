@@ -5,6 +5,26 @@ import java.util.List;
 
 public class Arrays {
 
+    //binary search
+    public int search(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left <= right) {
+            int middle = left + (right - left) / 2;
+            if (nums[middle] == target) return middle;
+
+            if (target < nums[middle]) {
+                //go left
+                right = middle - 1;
+            } else {
+                //go right
+                left = middle + 1;
+            }
+        }
+        return -1;
+    }
+
     public int maxProfit(int[] prices) {
         if (prices == null || prices.length < 2) return 0;
 
