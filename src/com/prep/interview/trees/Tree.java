@@ -9,6 +9,28 @@ public class Tree {
 
     TreeNode root;
 
+    public TreeNode lowestCommonAncestorBST(TreeNode p, TreeNode q) {
+        //makes sure that node p is always LESS than node q
+        if (p.value > q.value) {
+            TreeNode temp = q;
+            q = p;
+            p = temp;
+        }
+
+        while (root != null) {
+
+            if (root.value > p.value && root.value > q.value) {
+                root = root.left;
+            } else if (root.value < p.value && root.value < q.value) {
+                root = root.right;
+            } else {
+                return root;
+            }
+        }
+
+        return null;
+    }
+
     public TreeNode successor(TreeNode node) {
         if (root == null || node == null) return null;
 
