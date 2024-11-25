@@ -1,9 +1,59 @@
 package com.prep.interview.arrays;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class Arrays {
+
+    public List<List<Integer>> threeSum(int[] nums) {
+
+        //create map with key as array[i] and value as list of their indices
+        Map<Integer, Set<Integer>> map = new HashMap<>();
+        //output is a hashset of lists to avoid dups
+        Set<List<Integer>> outputSet = new HashSet<>();
+
+        //loop through array and add items to map
+        for (int i = 0; i < nums.length; i++) {
+            if (!map.containsKey(nums[i])) {
+                Set<Integer> newSet = new HashSet<>();
+                newSet.add(i);
+                map.put(nums[i], newSet);
+            }
+            Set<Integer> oldSet = map.get(nums[i]);
+            oldSet.add(i);
+            map.put(nums[i], oldSet);
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                int sum = nums[i] + nums[j];
+                int complement = sum * -1;
+                //check if complement exists in map and its not i or j
+                if (map.containsKey(complement)) {
+                    Set<Integer> compSet = map.get(complement);
+                    if (!compSet.contains(i) && !compSet.contains(j)) {
+                        //sort to avoid duplicates
+                        List<Integer> triplet = java.util.Arrays.asList(nums[i], nums[j], complement);
+                        Collections.sort(triplet);
+                        outputSet.add(triplet);
+                    }
+                }
+            }
+        }
+
+        //edge case for when there are multiple 0s
+        Set<Integer> zeroSet = map.get(0);
+        if (zeroSet != null && zeroSet.size() > 2) {
+            outputSet.add(List.of(0, 0, 0));
+        }
+
+        return new ArrayList<>(outputSet);
+    }
 
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
         if (image[sr][sc] == color) return image;
