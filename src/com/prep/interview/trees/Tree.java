@@ -9,6 +9,31 @@ public class Tree {
 
     TreeNode root;
 
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> outputList = new ArrayList<>();
+        if (root == null) return outputList;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            //creates a new list for every level in the tree
+            int level = queue.size();
+            List<Integer> list = new ArrayList<>();
+
+            for (int i = 0; i < level; i++) {
+                TreeNode current = queue.poll();
+                list.add(current.value);
+                if (current.left != null) {
+                    queue.offer(current.left);
+                }
+                if (current.right != null) {
+                    queue.offer(current.right);
+                }
+            }
+            outputList.add(list);
+        }
+        return outputList;
+    }
+
     public TreeNode lowestCommonAncestorBST(TreeNode p, TreeNode q) {
         //makes sure that node p is always LESS than node q
         if (p.value > q.value) {
@@ -111,40 +136,6 @@ public class Tree {
             return -1;
         }
         return Math.max(leftHeight, rightHeight) + 1;
-    }
-
-    public List<LinkedList<TreeNode>> createListOfDepths(final TreeNode root) {
-
-        final List<LinkedList<TreeNode>> output = new ArrayList<>();
-
-        if (root == null) {
-            return output;
-        }
-
-        final Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        while (!queue.isEmpty()) {
-            final int depth = queue.size();
-            final LinkedList<TreeNode> depthList = new LinkedList<>();
-
-            for (int i = 0; i < depth; i++) {
-                final TreeNode current = queue.poll();
-                if (current != null) {
-                    depthList.add(current);
-
-                    if (current.left != null) {
-                        queue.offer(current.left);
-                    }
-                    if (current.right != null) {
-                        queue.offer(current.right);
-                    }
-                }
-            }
-            if (!depthList.isEmpty()) {
-                output.add(depthList);
-            }
-        }
-        return output;
     }
 
     public TreeNode createBinarySearchTree(int[] sortedArray) {
