@@ -10,6 +10,48 @@ import java.util.Set;
 
 public class Arrays {
 
+    public int maxVisiblePoints(List<List<Integer>> points, int angle, List<Integer> location) {
+
+        //create an array of angles
+        List<Double> angles = new ArrayList<>();
+        int result = 0;
+
+        //convert points to angle and put in list
+        for (List<Integer> point : points) {
+            int x = point.get(0) - location.get(0);
+            int y = point.get(1) - location.get(1);
+
+            //this means that the current location is same as the current point
+            if (x == 0 && y == 0) {
+                result++;
+                continue;
+            }
+
+            //formula to convert points to angles
+            angles.add(Math.toDegrees(Math.atan2(y, x)));
+        }
+
+        //sort array for sliding window approach
+        Collections.sort(angles);
+        //add 360 degrees for case when points wrap around the circle after reaching 360 degrees
+        int size = angles.size();
+        for(int i = 0; i < size; i++) {
+            angles.add(angles.get(i) + 360);
+        }
+
+        //sliding window approach
+        int start = 0;
+        int count = 0;
+        for (int end = 0; end < angles.size(); end++) {
+            while (angles.get(end) - angles.get(start) > angle) {
+                start++;
+            }
+            count = Math.max(count, end - start + 1);
+        }
+
+        return count + result;
+    }
+
     public List<List<Integer>> threeSum(int[] nums) {
 
         //create map with key as array[i] and value as list of their indices
