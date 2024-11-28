@@ -17,4 +17,6 @@ public class GraphNode {
     private State state;
     private List<GraphNode> children;
 
+    public GraphNode(char data) {
+    }
 }
