@@ -10,6 +10,28 @@ public class Stack {
     int min = Integer.MAX_VALUE;
     java.util.Stack<Integer> minStack = new java.util.Stack<>();
 
+    public int evalRPN(String[] tokens) {
+        java.util.Stack<Integer> stack = new java.util.Stack<>();
+        for (String token : tokens) {
+            if (!token.equals("+") && !token.equals("-") &&
+                 !token.equals("*") && !token.equals("/")) {
+                stack.push(Integer.parseInt(token));
+            } else {
+                int value2 = stack.pop();
+                int value1 = stack.pop();
+                int output = switch (token) {
+                    case "+" -> value1 + value2;
+                    case "-" -> value1 - value2;
+                    case "/" -> value1 / value2;
+                    case "*" -> value1 * value2;
+                    default -> 0;
+                };
+                stack.push(output);
+            }
+        }
+        return stack.peek();
+    }
+
     public boolean backspaceCompare(String s, String t) {
 
         Deque<Character> stackS = new LinkedList<>();
