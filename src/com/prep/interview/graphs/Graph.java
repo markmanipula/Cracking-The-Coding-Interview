@@ -24,6 +24,53 @@ public class Graph {
         nodes.add(node);
     }
 
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        // Step 1: Create an adjacency list and in-degree array
+        List<Integer>[] graph = new ArrayList[numCourses];
+        int[] inDegree = new int[numCourses];
+
+        for (int i = 0; i < numCourses; i++) {
+            graph[i] = new ArrayList<>();
+        }
+
+        // Step 2: Populate graph and in-degree array
+        for (int[] prereq : prerequisites) {
+            int course = prereq[0];
+            int prereqCourse = prereq[1];
+            graph[prereqCourse].add(course);
+            inDegree[course]++;
+        }
+
+        // Step 3: Initialize a queue with courses that have no prerequisites (in-degree == 0)
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < numCourses; i++) {
+            if (inDegree[i] == 0) {
+                queue.offer(i);
+            }
+        }
+
+        // Step 4: Process the courses using BFS
+        int processedCourses = 0;
+
+        while (!queue.isEmpty()) {
+            int currentCourse = queue.poll();
+            processedCourses++;
+
+            // For each course, reduce the in-degree of its neighbors
+            for (int neighbor : graph[currentCourse]) {
+                inDegree[neighbor]--;
+
+                // If a neighbor's in-degree becomes 0, add it to the queue
+                if (inDegree[neighbor] == 0) {
+                    queue.offer(neighbor);
+                }
+            }
+        }
+
+        // Step 5: If we've processed all courses, there's no cycle, and we can finish all courses
+        return processedCourses == numCourses;
+    }
+
     public GraphNode cloneGraph(GraphNode node) {
         if (node == null) return null;
 

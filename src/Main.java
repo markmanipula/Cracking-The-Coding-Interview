@@ -1,4 +1,5 @@
 import com.prep.interview.arrays.Arrays;
+import com.prep.interview.graphs.Graph;
 import com.prep.interview.linkedlists.LinkedList;
 import com.prep.interview.queues.AnimalShelter;
 import com.prep.interview.queues.models.Cat;
@@ -18,10 +19,9 @@ public class Main {
         java.util.Stack<Integer> stack = new Stack<>();
         com.prep.interview.stacks.SortStack myStack = new com.prep.interview.stacks.SortStack();
         AnimalShelter animalShelter = new AnimalShelter();
+        Graph graph = new Graph();
         Tree tree = new Tree();
 
-        System.out.println(strings.longestPalindrome("bb"));
-
-        tree.createBinarySearchTree(new int []{2,4,6,8,10,12,14,16});
+        System.out.println(graph.canFinish(6, new int[][]{{1, 0}, {2, 1}, {3, 2}, {1, 3}}));
     }
 }
