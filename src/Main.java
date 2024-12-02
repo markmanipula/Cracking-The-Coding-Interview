@@ -22,6 +22,6 @@ public class Main {
         Graph graph = new Graph();
         Tree tree = new Tree();
 
-        System.out.println(graph.canFinish(6, new int[][]{{1, 0}, {2, 1}, {3, 2}, {1, 3}}));
+        System.out.println(arrays.coinChange(new int[] {1,2,5}, 11));
     }
 }

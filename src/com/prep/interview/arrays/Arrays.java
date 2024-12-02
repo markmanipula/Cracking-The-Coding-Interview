@@ -10,6 +10,45 @@ import java.util.Set;
 
 public class Arrays {
 
+    public int coinChange(int[] coins, int amount) {
+        // Edge case: if the amount is 0, no coins are needed
+        if (amount == 0) return 0;
+
+        // Memoization map to store already computed results
+        Map<Integer, Integer> memo = new HashMap<>();
+
+        // DFS call
+        int result = dfs(coins, amount, memo);
+
+        // If result is Integer.MAX_VALUE, it means no solution exists
+        return result == Integer.MAX_VALUE ? -1 : result;
+    }
+
+    private int dfs(int[] coins, int amount, Map<Integer, Integer> memo) {
+        // Base case: when the amount is 0, no coins are needed
+        if (amount == 0) return 0;
+
+        // If the amount is negative, return an impossible value
+        if (amount < 0) return Integer.MAX_VALUE;
+
+        // If the result for the current amount is already computed, return it
+        if (memo.containsKey(amount)) return memo.get(amount);
+
+        int minCoins = Integer.MAX_VALUE;
+
+        // Explore all coins
+        for (int coin : coins) {
+            int res = dfs(coins, amount - coin, memo);
+            if (res != Integer.MAX_VALUE) {
+                minCoins = Math.min(minCoins, res + 1);
+            }
+        }
+
+        // Store the result in the memoization map
+        memo.put(amount, minCoins);
+        return minCoins;
+    }
+
     public int maxVisiblePoints(List<List<Integer>> points, int angle, List<Integer> location) {
 
         //create an array of angles
