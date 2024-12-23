@@ -10,6 +10,21 @@ import java.util.Set;
 
 public class Arrays {
 
+    public int coinChangeBruteForce(int[] coins, int amount) {
+        if (amount == 0) return 0;
+        if (amount < 0) return Integer.MAX_VALUE;
+
+        int min = Integer.MAX_VALUE;
+        for (int coin : coins) {
+            int res = coinChangeBruteForce(coins, amount - coin);
+            if (res != Integer.MAX_VALUE) {
+                min = Math.min(min, res + 1);
+            }
+        }
+
+        return min == Integer.MAX_VALUE ? -1 : min;
+    }
+
     public int coinChange(int[] coins, int amount) {
         // Edge case: if the amount is 0, no coins are needed
         if (amount == 0) return 0;

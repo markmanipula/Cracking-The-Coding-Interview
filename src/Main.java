@@ -22,6 +22,6 @@ public class Main {
         Graph graph = new Graph();
         Tree tree = new Tree();
 
-        System.out.println(arrays.coinChange(new int[] {1,2,5}, 11));
+        System.out.println(arrays.coinChangeBruteForce(new int[] {2}, 3));
     }
 }
